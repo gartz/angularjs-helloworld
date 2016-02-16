@@ -1,0 +1,33 @@
+<div layout="vertical" layout-fill>
+
+  <md-content>
+    <header>
+      <acme-navbar creation-date="main.creationDate"></acme-navbar>
+    </header>
+
+    <section layout="row" flex>
+      <div>
+        <md-input-container>
+          <label>User</label>
+          <input ng-model="username">
+        </md-input-container>
+        <md-list>
+          <md-subheader class="md-no-sticky">{{users.length}} user's found</md-subheader>
+          <md-list-item ng-repeat="item in users">
+            <img ng-src="{{item.avatar_url}}}" class="md-avatar" alt="{{item.login}}" />
+            <div class="md-list-item-text" layout="column">
+              <p>
+                <b>{{ item.login }}</b> <br />
+                Score: {{ item.score }}
+              </p>
+            </div>
+          </md-list-item>
+        </md-list>
+      </div>
+      <div>
+
+      </div>
+    </section>
+  </md-content>
+
+</div>
