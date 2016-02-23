@@ -1,0 +1,24 @@
+<div class="users" layout="column" flex>
+  <md-input-container flex>
+    <label>User</label>
+    <input ng-model="username" ng-change="user.setUsername(username)">
+  </md-input-container>
+  <md-list flex>
+    <md-subheader class="md-no-sticky">{{users.length}} user's found</md-subheader>
+    <div ng-repeat="item in users">
+      <md-button ng-click="user.setUsername(item.login)"
+                 ng-class="{'md-raised': item.login === username}"
+                 style="width: 100%">
+        <md-list-item>
+          <img ng-src="{{item.avatar_url}}}" class="md-avatar" alt="{{item.login}}" />
+          <div class="md-list-item-text" layout="column">
+            <p>
+              <b>{{ item.login }}</b> <br />
+              Score: {{ item.score }}
+            </p>
+          </div>
+        </md-list-item>
+      </md-button>
+    </div>
+  </md-list>
+</div>
