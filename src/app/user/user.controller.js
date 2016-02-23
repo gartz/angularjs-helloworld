@@ -10,7 +10,7 @@ export class UserController {
     this.$state = $state;
     this.$log = $log;
 
-    this.setUsername($stateParams.username || '');
+    this.$scope.username = $stateParams.username || '';
     this.$scope.users = [];
 
     $scope.$watch('username', this.findUsername.bind(this));
@@ -43,12 +43,11 @@ export class UserController {
   findUsername(value) {
     this.$log.debug(value);
     this.debounceGetUsers(value);
-
-    // Bind state
-    this.$state.go(this.$state.current, {username: value}, {notify: false});
   }
 
   setUsername(username = '') {
+    // Bind state
+    this.$state.go('home.user', {username}, {notify: false});
     this.$scope.username = username;
   }
 

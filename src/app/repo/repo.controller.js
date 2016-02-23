@@ -49,7 +49,7 @@ export class RepoController {
     this.debounceGetUsers(value);
 
     // Bind state
-    this.$state.go(this.$state.current, {repo: value}, {notify: false});
+    this.$state.go('home.user.repo', {repo: value}, {notify: false});
   }
 
   setName(value = '') {
