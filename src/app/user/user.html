@@ -7,8 +7,7 @@
     <md-subheader class="md-no-sticky">{{users.length}} user's found</md-subheader>
     <div ng-repeat="item in users">
       <md-button ng-click="user.setUsername(item.login)"
-                 ng-class="{'md-raised': item.login === username}"
-                 style="width: 100%">
+                 ng-class="{'md-raised': item.login === username}">
         <md-list-item>
           <img ng-src="{{item.avatar_url}}}" class="md-avatar" alt="{{item.login}}" />
           <div class="md-list-item-text" layout="column">
