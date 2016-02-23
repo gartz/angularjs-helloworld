@@ -11,12 +11,12 @@ export class UserController {
     this.$log = $log;
 
     this.setUsername($stateParams.username || '');
-    this.setUsers();
+    this.$scope.users = [];
 
     $scope.$watch('username', this.findUsername.bind(this));
 
-    // Don't request the github API too many times while data is changing, debounce the requests
-    this.debouceGetUsers = _.debounce((username) => {
+    // Don't request the Github API too many times while data is changing, debounce the requests
+    this.debounceGetUsers = _.debounce((username) => {
       if (!username) {
         this.setUsers();
         this.$log.debug('empty username');
@@ -42,7 +42,7 @@ export class UserController {
 
   findUsername(value) {
     this.$log.debug(value);
-    this.debouceGetUsers(value);
+    this.debounceGetUsers(value);
 
     // Bind state
     this.$state.go(this.$state.current, {username: value}, {notify: false});
@@ -56,5 +56,23 @@ export class UserController {
     // Users can be mapped to a user class
 
     this.$scope.users = users;
+
+    var user = users.find((user) => {
+      return user.login.toUpperCase() === this.$scope.username.toUpperCase();
+    });
+
+    this.setUser(user);
+  }
+
+  setUser(user = null) {
+    this.$scope.currentUser = user;
+
+    if (user) {
+      if (!this.$state.params.repo) {
+        this.$state.go('home.user.repo', {repo: ''});
+      }
+    } else {
+      this.$state.go('home.user');
+    }
   }
 }

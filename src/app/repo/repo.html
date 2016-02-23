@@ -1,33 +1,21 @@
-<div layout="vertical" layout-fill>
-
-  <md-content>
-    <header>
-      <acme-navbar creation-date="main.creationDate"></acme-navbar>
-    </header>
-
-    <section layout="row" flex>
-      <div>
-        <md-input-container>
-          <label>Repository</label>
-          <input ng-model="repo">
-        </md-input-container>
-        <md-list>
-          <md-subheader class="md-no-sticky">{{repos.length}} repositories found</md-subheader>
-          <md-list-item ng-repeat="item in repos">
-            <img ng-src="{{item.avatar_url}}}" class="md-avatar" alt="{{item.login}}" />
-            <div class="md-list-item-text" layout="column">
-              <p>
-                <b>{{ item.login }}</b> <br />
-                Score: {{ item.score }}
-              </p>
-            </div>
-          </md-list-item>
-        </md-list>
-      </div>
-      <div>
-
-      </div>
-    </section>
-  </md-content>
-
+<div class="repositories" layout="column" flex>
+  <md-input-container>
+    <label>Repository</label>
+    <input ng-model="name" ng-change="repo.setName(name)">
+  </md-input-container>
+  <md-list flex>
+    <md-subheader class="md-no-sticky">{{repos.length}} repositories found</md-subheader>
+    <div ng-repeat="item in repos">
+      <md-button ng-click="repo.setName(item.name)"
+                 ng-class="{'md-raised': item.name.toUpperCase() === name.toUpperCase()}">
+        <md-list-item>
+          <div class="md-list-item-text" layout="column">
+            <p>
+              <b>{{ item.name }}</b>
+            </p>
+          </div>
+        </md-list-item>
+      </md-button>
+    </div>
+  </md-list>
 </div>

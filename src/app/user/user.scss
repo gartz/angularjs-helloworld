@@ -1,3 +1,11 @@
-.users md-button {
-  width: 100%;
+.users {
+  md-button {
+    width: 100%;
+  }
+
+  .login {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+  }
 }
