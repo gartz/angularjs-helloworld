@@ -1,21 +1,51 @@
 <div class="repositories" layout="column" flex>
-  <md-input-container>
-    <label>Repository</label>
-    <input ng-model="name" ng-change="repo.setName(name)">
-  </md-input-container>
-  <md-list flex>
+    <md-content class="md-padding">
+      <md-autocomplete
+        md-selected-item="repo.selectedItem"
+        md-search-text-change="repo.searchTextChange(repo.searchText)"
+        md-search-text="repo.searchText"
+        md-selected-item-change="repo.selectedItemChange(item)"
+        md-items="item in repo.querySearch(repo.searchText)"
+        md-item-text="item.name"
+        md-min-length="0"
+        placeholder="Pick an repository"
+        md-menu-class="autocomplete-custom-template">
+        <md-item-template>
+            <span class="item-title">
+              <md-icon md-svg-icon="assets/icons/octicon-repo.svg"></md-icon>
+              <span> {{item.name}} </span>
+            </span>
+            <span class="item-metadata">
+              <span class="item-metastat">
+                <strong>{{item.watchers}}</strong> watchers
+              </span>
+              <span class="item-metastat">
+                <strong>{{item.forks}}</strong> forks
+              </span>
+            </span>
+        </md-item-template>
+      </md-autocomplete>
+    </md-content>
     <md-subheader class="md-no-sticky">{{repos.length}} repositories found</md-subheader>
-    <div ng-repeat="item in repos | filter:name">
-      <md-button ng-click="repo.setName(item.name)"
-                 ng-class="{'md-raised': item.name.toUpperCase() === name.toUpperCase()}">
-        <md-list-item>
-          <div class="md-list-item-text" layout="column">
-            <p>
-              <b>{{ item.name }}</b>
-            </p>
+    <div class="active-repository" layout="column" flex>
+      <md-whiteframe class="md-whiteframe-3dp repo-whiteframe"
+                     flex-sm="45"
+                     flex-gt-sm="35"
+                     flex-gt-md="25"
+                     layout
+                     layout-align="center center">
+        <span class="item-title">
+          <md-icon md-svg-icon="assets/icons/octicon-repo.svg"></md-icon>
+          <span> {{activeRepo.name}} </span>
+          <div class="item-metadata">
+            <span class="item-metastat">
+              <strong>{{activeRepo.watchers}}</strong> watchers
+            </span>
+            <span class="item-metastat">
+              <strong>{{activeRepo.forks}}</strong> forks
+            </span>
           </div>
-        </md-list-item>
-      </md-button>
+        </span>
+      </md-whiteframe>
     </div>
-  </md-list>
 </div>

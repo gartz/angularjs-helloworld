@@ -4,4 +4,39 @@
   .md-button {
     width: 100%;
   }
+
+  .repo-whiteframe {
+    background: #fff;
+    margin: 30px;
+    height: 100px;
+
+    .item-title md-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+}
+
+.autocomplete-custom-template {
+  li {
+    border-bottom: 1px solid #ccc;
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    white-space: normal;
+  }
+
+  li:last-child {
+    border-bottom-width: 0;
+  }
+
+  .item-title, .item-metadata {
+    display: block;
+    line-height: 2;
+  }
+
+  .item-title md-icon {
+    height: 18px;
+    width: 18px;
+  }
 }

@@ -9,6 +9,7 @@ export class RepoController {
     this.$http = $http;
     this.$state = $state;
     this.$log = $log;
+    this.searchText = '';
 
     this.setName($stateParams.repo || '');
     this.setRepos();
@@ -17,7 +18,6 @@ export class RepoController {
 
     // Don't request the Github API too many times while data is changing, debounce the requests
     this.debounceGetUsers = _.debounce(() => {
-      var repo = this.$scope.name;
       var username = $scope.$parent && $scope.$parent.username || '';
       if (!username) {
         this.setRepos();
@@ -58,6 +58,7 @@ export class RepoController {
         ;
       }
       getPage();
+      setRepo();
     }, 300);
   }
 
@@ -69,14 +70,62 @@ export class RepoController {
 
   setName(value = '') {
     this.$scope.name = value;
+    this.searchText = value;
 
     // Bind state
     this.$state.go('home.user.repo', {repo: value}, {notify: false});
+
+    this.activeRepo();
   }
 
   setRepos(repos = []) {
     // Users can be mapped to a user class
 
     this.$scope.repos = repos;
+
+    this.activeRepo();
   }
+
+  activeRepo(repo) {
+    if (repo) {
+      this.$scope.activeRepo = repo;
+      return;
+    }
+
+    var name = this.$scope.name;
+
+    if (!name || !this.$scope.repos) {
+      this.$scope.activeRepo = null;
+      return;
+    }
+
+    var activeRepo = this.$scope.repos.find((repo) => {
+      return repo.name.toUpperCase() === name.toUpperCase();
+    });
+
+    this.$scope.activeRepo = activeRepo;
+  }
+
+  searchTextChange(text) {
+    this.setName(text);
+    this.activeRepo();
+  }
+
+  selectedItemChange(item) {
+    this.setName(item.name);
+    this.activeRepo(item);
+  }
+
+  querySearch (query) {
+    var repos = this.$scope.repos;
+    return query ? repos.filter( this.createFilterFor(query) ) : repos;
+  }
+
+  createFilterFor(query) {
+    var lowercaseQuery = angular.lowercase(query);
+    return function filterFn(item) {
+      return (item.name.toLowerCase().indexOf(lowercaseQuery) === 0);
+    };
+  }
+
 }
