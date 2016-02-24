@@ -5,7 +5,7 @@
   </md-input-container>
   <md-list flex>
     <md-subheader class="md-no-sticky">{{repos.length}} repositories found</md-subheader>
-    <div ng-repeat="item in repos">
+    <div ng-repeat="item in repos | filter:name">
       <md-button ng-click="repo.setName(item.name)"
                  ng-class="{'md-raised': item.name.toUpperCase() === name.toUpperCase()}">
         <md-list-item>
