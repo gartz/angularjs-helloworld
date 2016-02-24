@@ -40,7 +40,7 @@ export class RepoController {
           })
           .then((data) => {
             // Associate the list of users
-            reposData = reposData.concat(data.data);
+            reposData = [...reposData, ...data.data];
             setRepo(reposData);
 
             // Get next pages
