@@ -58,11 +58,7 @@ export class RepoController {
         ;
       }
       getPage();
-      setRepo([{
-        name: 'test',
-        watchers: 300,
-        forks: 3
-      }]);
+      setRepo();
     }, 300);
   }
 

@@ -67,11 +67,11 @@ export class UserController {
     this.$scope.currentUser = user;
 
     if (user) {
-      if (!this.$state.params.repo) {
-        this.$state.go('home.user.repo', {repo: ''}, {notify: false});
+      if (!this.$scope.$$childHead.repo) {
+        this.$state.go('home.user.repo', {repo: ''});
       }
     } else {
-      this.$state.go('home.user', null, {notify: false});
+      this.$state.go('home.user');
     }
   }
 }
