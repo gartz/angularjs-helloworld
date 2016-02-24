@@ -47,8 +47,8 @@ export class UserController {
 
   setUsername(username = '') {
     // Bind state
-    this.$state.go('home.user', {username}, {notify: false});
     this.$scope.username = username;
+    this.$state.go('home.user', {username}, {notify: false});
   }
 
   setUsers(users = []) {
@@ -68,10 +68,10 @@ export class UserController {
 
     if (user) {
       if (!this.$state.params.repo) {
-        this.$state.go('home.user.repo', {repo: ''});
+        this.$state.go('home.user.repo', {repo: ''}, {notify: false});
       }
     } else {
-      this.$state.go('home.user');
+      this.$state.go('home.user', null, {notify: false});
     }
   }
 }

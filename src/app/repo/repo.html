@@ -8,7 +8,7 @@
         md-items="item in repo.querySearch(repo.searchText)"
         md-item-text="item.name"
         md-min-length="0"
-        placeholder="Pick an repository"
+        placeholder="Pick a repository"
         md-menu-class="autocomplete-custom-template">
         <md-item-template>
             <span class="item-title">
@@ -27,7 +27,7 @@
       </md-autocomplete>
     </md-content>
     <md-subheader class="md-no-sticky">{{repos.length}} repositories found</md-subheader>
-    <div class="active-repository" layout="column" flex>
+    <div class="active-repository" layout="column" flex ng-if="activeRepo">
       <md-whiteframe class="md-whiteframe-3dp repo-whiteframe"
                      flex-sm="45"
                      flex-gt-sm="35"

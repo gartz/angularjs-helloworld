@@ -58,7 +58,11 @@ export class RepoController {
         ;
       }
       getPage();
-      setRepo();
+      setRepo([{
+        name: 'test',
+        watchers: 300,
+        forks: 3
+      }]);
     }, 300);
   }
 
@@ -112,7 +116,7 @@ export class RepoController {
   }
 
   selectedItemChange(item) {
-    this.setName(item.name);
+    this.setName(item && item.name || '');
     this.activeRepo(item);
   }
 
